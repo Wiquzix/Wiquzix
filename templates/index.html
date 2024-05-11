@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>тест дада</title>
-	</head>
-	<body>
-		<input type="text" id="name" />
-		<input type="submit" />
-	</body>
-</html>
+{% extends 'base.html' %} {% block title %} main {% endblock %} {% block main %}
+<a href="/add_note">add</a>
+<a href="all_notes">all_notes</a>
+{% if users %} {% for i in users %}
+<h4>{{i.login}}</h4>
+{% endfor %} {% else %}
+<h4>пока нет ни одного пользователя</h4>
+{% endif %} {% endblock %}
