@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block title %} add note {% endblock %} {% block
+style %}
+<style>
+	.a {
+		white-space: nowrap;
+	}
+</style>
+{% endblock %} {% block main %} {% if notes %} {% for note in notes %}
+<div class="a">
+	<input type="checkbox" />
+	<h3>{{note.theme}}</h3>
+	<h5>{{note.text}}</h5>
+</div>
+{% endfor %} {% endif %} {% endblock %}

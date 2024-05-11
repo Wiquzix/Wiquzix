@@ -35,7 +35,7 @@ def all_notes():
     return render_template('all_notes.html',notes=notes)
 
 @app.route('/add_note', methods=['GET', 'POST'])
-def a():
+def add():
     if request.method=="GET":
       return render_template('add.html')
     theme = request.form.get('theme')
@@ -92,4 +92,4 @@ def logout():
 if __name__ == "__main__":
     with app.app_context():
         db.create_all()
-    app.run(host='127.0.0.1', port=8000, debug=True)
+    app.run(host='localhost', port=8000, debug=True)
