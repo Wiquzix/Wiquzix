@@ -1,14 +1,18 @@
-{% extends 'base.html' %} {% block title %} add note {% endblock %} {% block
-style %}
-<style>
-	.a {
-		white-space: nowrap;
-	}
-</style>
-{% endblock %} {% block main %} {% if notes %} {% for note in notes %}
-<div class="a">
-	<input type="checkbox" />
-	<h3>{{note.theme}}</h3>
-	<h5>{{note.text}}</h5>
-</div>
-{% endfor %} {% endif %} {% endblock %}
+{% extends 'base.html' %} {% block title %} all notes {% endblock %} {% block
+main %} {% if notes %} {% for i in range(notes|length) %}
+<form action="" , method="get">
+	<input
+		type="checkbox"
+		name="checkbox{{i+1}}"
+		id="checkbox{{i+1}}"
+		value="{{i+1}}"
+	/>
+	<label for="checkbox{{i+1}}"
+		><b>{{notes[i].theme}} </b><em>{{notes[i].text}}</em
+		><a href="/delete_note/{{i+1}}">delete</a> </label
+	><br />
+
+	{% endfor %} {% endif %}
+	<input type="submit" value="submit" />
+</form>
+{% endblock %}

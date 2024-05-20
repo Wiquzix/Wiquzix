@@ -28,11 +28,26 @@ def index():
 
 #добавление удаление и просмотр заметок
 
+@app.route('/delete_note/<int:id>')
+def delete_note(id):
+  note = Notes.query.filter_by(id=id).first()
+  db.session.delete(note)
+  db.session.commit()
+  return redirect('/')
 
-@app.route('/all_notes')
+@app.route('/all_notes', methods=['GET', 'POST'])
 def all_notes():
-    notes = Notes.query.filter_by(user=current_user.id).all()
-    return render_template('all_notes.html',notes=notes)
+  if not(current_user.is_authenticated):
+     return redirect('/')
+  notes = Notes.query.filter_by(user=current_user.id).all()
+  # if request.method=='GET':
+  #   return render_template('all_notes.html',notes=notes)
+  for i in range(1,len(notes)+1):
+    check = request.form.get('checkbox'+str(i+1))
+    print(check)
+  if request.method=='GET':
+     print(request.form.get('checkbox1'),10)
+  return render_template('all_notes.html', notes=notes)
 
 @app.route('/add_note', methods=['GET', 'POST'])
 def add():
@@ -68,7 +83,6 @@ def signup():
       db.session.commit()
       return redirect('/')
     except:
-      print(login)
       return redirect('/')
 
 @app.route('/login', methods=['GET', 'POST'])
